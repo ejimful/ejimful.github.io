@@ -1,0 +1,299 @@
+{{ if .Site.Params.projects.enable | default false }}
+{{- $projects := .Site.Language.Params.projects | default .Site.Params.projects -}}
+<section id="projects" class="py-5">
+    <div class="container">
+        <h3 class="text-center">{{ $projects.title | default .Site.Params.projects.title | default (i18n "projects") }}</h3>
+        <div class="row justify-content-center px-3 px-md-5">
+            {{ range $projects.items | default .Site.Params.projects.items }}
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card my-3 h-100 project-card" title="{{ .title }}" onclick="openModal('{{ .modalId }}')">
+                    <div class="card-head">
+                        <img class="card-img-top" src="{{ .image }}" alt="{{ .title }}">
+                    </div>
+                    <div class="card-body bg-transparent p-3">
+                        <div class="pb-2 bg-transparent">
+                            {{ range .badges }}
+                            <span class="badge badge-secondary">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        <h5 class="card-title bg-transparent mt-1">{{ .title }}</h5>
+                        <div class="card-text bg-transparent secondary-font">
+                            {{ .content }}
+                        </div>
+                    </div>
+                    {{ if or (.links) (.featured) }}
+                    <div class="card-footer py-3">
+                        {{ range .links }}
+                        <span class="m-1 mx-2">
+                            <a href="{{ .url }}" target="_blank">
+                                <i class="{{ .icon }}"></i>
+                            </a>
+                        </span>
+                        {{ end }}
+                        {{ if .featured }}
+                        <span class="float-end">
+                            <a class="btn btn-sm" href="{{ .featured.link }}" target="_blank">
+                                {{ .featured.name }}
+                            </a>
+                        </span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            <script>
+                window.projectDetails = window.projectDetails || {};
+                window.projectDetails["{{ .modalId }}"] = {
+                    title: {{ .title | jsonify }},
+                    badges: {{ .badges | default (slice) | jsonify }},
+                    body: {{ (.details | default .content) | markdownify | safeHTML | jsonify }},
+                    links: {{ .links | default (slice) | jsonify }},
+                    images: {{ .modalImages | default (slice) | jsonify }}
+                };
+            </script>
+            {{ end }}
+            {{ range ( where .Site.RegularPages "Type" "projects" ) }}
+            {{ if .Params.showInHome | default true }}
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card my-3 h-100 project-card" title="{{ .Title }}" onclick="openModal('{{ .File.UniqueID }}')">
+                    <div class="card-head">
+                        <img class="card-img-top" src="{{ .Params.image }}" alt="{{ .Title }}">
+                    </div>
+                    <div class="card-body bg-transparent p-3">
+                        <div class="pb-2 bg-transparent">
+                            {{ range .Params.badges }}
+                            <span class="badge badge-secondary">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        <h5 class="card-title bg-transparent">{{ .Title | truncate 50 }}</h5>
+                        <div class="card-text bg-transparent secondary-font">
+                            {{ .Summary | truncate 100 | safeHTML }}
+                        </div>
+                    </div>
+                    <div class="card-footer py-3">
+                        {{ range .Params.links }}
+                        <span class="m-1 mx-2">
+                            <a href="{{ .url }}">
+                                <i class="{{ .icon }}"></i>
+                            </a>
+                        </span>
+                        {{ end }}
+                        <span class="float-end">
+                            <a class="btn btn-sm" href="{{ .RelPermalink }}">
+                                Know more
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                window.projectDetails = window.projectDetails || {};
+                window.projectDetails["{{ .File.UniqueID }}"] = {
+                title: {{ .Title | jsonify }},
+                badges: {{ .Params.badges | default (slice) | jsonify }},
+                body: {{ .Content | markdownify | safeHTML | jsonify }},
+                links: {{ .Params.links | default (slice) | jsonify }}, 
+                images: {{ .Params.modalImages | default (slice) | jsonify }}
+                };
+            </script>
+            {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+<!-- Project Modal (Top-tier) -->
+<div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal__dialog" role="document">
+    <div class="modal__header">
+      <div>
+        <h4 id="modal-title" class="modal__title"></h4>
+        <div id="modal-meta" class="modal__meta"></div>
+      </div>
+      <button class="modal__close" onclick="closeModal()" aria-label="Close">
+        ✕
+      </button>
+    </div>
+
+    <div class="modal__body">
+        <div id="modal-gallery" class="modal__gallery" style="display:none;">
+            <button class="modal__nav modal__nav--prev" type="button" aria-label="Previous image">‹</button>
+
+            <div class="modal__media">
+                <a id="modal-img-link" class="modal__imglink" href="#" target="_blank" rel="noopener noreferrer">
+                <img id="modal-img" class="modal__img" src="" alt="Project image" loading="lazy">
+                </a>
+                <div id="modal-counter" class="modal__counter"></div>
+            </div>
+
+            <button class="modal__nav modal__nav--next" type="button" aria-label="Next image">›</button>
+        </div>
+        <div id="modal-body"></div>
+    </div>
+
+    <div class="modal__footer">
+      <div id="modal-links" class="modal__links"></div>
+      <div style="color: var(--m-muted); font-size: 0.9rem;">Press ESC to close</div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+    const modal = document.getElementById("project-modal");
+    const titleEl = document.getElementById("modal-title");
+    const metaEl  = document.getElementById("modal-meta");
+    const bodyEl  = document.getElementById("modal-body");
+    const galleryEl = document.getElementById("modal-gallery");
+    const imgEl = document.getElementById("modal-img");
+    const imgLinkEl = document.getElementById("modal-img-link");
+    const counterEl = document.getElementById("modal-counter");
+    const prevBtn = modal.querySelector(".modal__nav--prev");
+    const nextBtn = modal.querySelector(".modal__nav--next");
+    const linksEl = document.getElementById("modal-links");
+
+    let currentImgs = [];
+    let currentIdx = 0;
+
+    function normalizeArray(x) {
+    if (Array.isArray(x)) return x;
+    if (typeof x === "string") {
+        const s = x.trim();
+        try {
+        const parsed = JSON.parse(s);
+        if (Array.isArray(parsed)) return parsed;
+        } catch (_) {}
+        return s ? [s] : [];
+    }
+    return x ? [x] : [];
+    }
+
+    function renderImage() {
+    if (!currentImgs.length) return;
+    const src = currentImgs[currentIdx];
+
+    imgEl.src = src;
+    imgLinkEl.href = src;
+
+    if (currentImgs.length > 1) {
+        counterEl.textContent = `${currentIdx + 1} / ${currentImgs.length}`;
+        prevBtn.style.display = "";
+        nextBtn.style.display = "";
+    } else {
+        counterEl.textContent = "";
+        prevBtn.style.display = "none";
+        nextBtn.style.display = "none";
+    }
+    }
+
+    function nextImage() {
+    if (!currentImgs.length) return;
+    currentIdx = (currentIdx + 1) % currentImgs.length;
+    renderImage();
+    }
+
+    function prevImage() {
+    if (!currentImgs.length) return;
+    currentIdx = (currentIdx - 1 + currentImgs.length) % currentImgs.length;
+    renderImage();
+    }
+
+    prevBtn?.addEventListener("click", (e) => { e.stopPropagation(); prevImage(); });
+    nextBtn?.addEventListener("click", (e) => { e.stopPropagation(); nextImage(); });
+    imgEl?.addEventListener("click", (e) => { e.preventDefault(); nextImage(); });
+
+
+  function escHandler(e){
+    if (e.key === "Escape") closeModal();
+  }
+
+  function decodeIfJsonString(x) {
+  if (x == null) return "";
+  if (typeof x !== "string") return x;
+
+  const s = x.trim();
+  if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+    try {
+      return JSON.parse(s);
+    } catch (_) {}
+  }
+  if (s.includes("\\u003c") || s.includes("\\n") || s.includes("\\u0026")) {
+    try {
+      return JSON.parse(`"${s.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`);
+    } catch (_) {}
+  }
+
+  return x;
+}
+  window.openModal = function(id){
+    const data = (window.projectDetails || {})[id];
+    if (!data) return;
+
+    const decodedTitle = decodeIfJsonString(data.title);
+    titleEl.textContent = decodedTitle || "Project";
+    function normalizeArray(x) {
+        if (Array.isArray(x)) return x;
+        if (typeof x === "string") {
+            const s = x.trim();
+            // 先試 JSON 字串，例如 '["A","B"]'
+            try {
+            const parsed = JSON.parse(s);
+            if (Array.isArray(parsed)) return parsed;
+            } catch (_) {}
+            // 再試逗號分隔字串，例如 "A, B, C"
+            return s.split(",").map(v => v.trim()).filter(Boolean);
+        }
+        if (x && typeof x === "object") return [x];
+        return [];
+    }
+    const imgs = normalizeArray(data.images);
+
+    if (imgs.length) {
+        galleryEl.style.display = "flex";
+        currentImgs = imgs;
+        currentIdx = 0;
+        renderImage();
+    } else {
+        galleryEl.style.display = "none";
+        currentImgs = [];
+        currentIdx = 0;
+        imgEl.src = "";
+        imgLinkEl.href = "#";
+        counterEl.textContent = "";
+    }
+
+const badges = normalizeArray(data.badges);
+metaEl.innerHTML = badges.map(b => `<span class="modal__chip">${b}</span>`).join("");
+    const decodedBody = decodeIfJsonString(data.body);
+    bodyEl.innerHTML = decodedBody || "";
+    const links = normalizeArray(data.links);
+
+    linksEl.innerHTML = links.map(l => {
+    if (typeof l === "string") {
+        return `<a class="modal__link" href="${l}" target="_blank" rel="noopener noreferrer"><span>Link</span></a>`;
+    }
+    const icon = l.icon ? `<i class="${l.icon}"></i>` : "";
+    const name = l.name ? l.name : "Link";
+    return `<a class="modal__link" href="${l.url}" target="_blank" rel="noopener noreferrer">${icon}<span>${name}</span></a>`;
+    }).join("");
+
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", escHandler);
+
+    // focus close button for accessibility
+    const closeBtn = modal.querySelector(".modal__close");
+    closeBtn && closeBtn.focus();
+  };
+
+  window.closeModal = function(){
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", escHandler);
+  };
+
+  // click outside to close
+  modal.addEventListener("click", function(e){
+    if (e.target === modal) closeModal();
+  });
+})();
+</script>
+{{ end }}
