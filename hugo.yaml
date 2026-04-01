@@ -157,7 +157,7 @@ params:
     intro: "Hi, my name is"
     title: "Iris Kuo"
     subtitle: "I build scalable software and ML-powered applications."
-    content: "A passionate software engineer who build systems that are efficient, reliable, and production-ready. My work spans web applications, data pipelines, and real-time AI systems that deliver measurable impact."
+    content: "A passionate grad student who build systems that are efficient, reliable, and production-ready. My work spans web applications, data pipelines, and real-time AI systems that deliver measurable impact."
     image: /images/iriskuo.jpeg
     bottomImage:
       enable: true
@@ -206,18 +206,18 @@ params:
           - name: "Data Science Intern"
             date: "Feb 2024 - Jan 2025"
             content: |
-              - Developed end-to-end data pipelines with Python/PLSQL, visualizing in Tableau to improve decision-making efficiency and increase dashboard adoption across teams by 60%
-              - Optimized revenue reports by refining SQL queries and data logic, cutting data load time by 38%
-              - Applied RAG in business intelligence, conducting experiments that boosted data retrieval efficiency by 25%
-              - Collaborated with multiple departments analyze data by Python/SQL, cutting report turnaround time by 40%
+              - Built and maintained end-to-end data pipelines in Python and PL/SQL to support scalable analytics workflows, increasing cross-team adoption by 60%
+              - Optimized complex SQL queries and data transformation workflows, reducing report data load time by 38%
+              - Designed and implemented a production RAG pipeline to improve BI data retrieval efficiency by 25%
+              - Automated reporting pipelines in Python and SQL, reducing turnaround time by 40%
       - company: "Avary Holding"
         companyUrl: "https://www.avaryholding.com/en/"
         jobs:
           - name: "Artificial Intelligence Intern"
             date: "JUL 2023 - AUG 2023"
             content: |
-              - Designed and implemented a real-time monitoring system with YOLOv8 and LSTM, ensuring operator gestures comply with SOPs and boosting product yield by 15%
-              - Enhanced PCB image preprocessing using OpenCV, boosting edge recognition accuracy by 20%
+              - Designed and deployed a real-time computer vision pipeline using YOLOv8 and LSTM to detect operator gestures, ensuring SOP compliance and improving product yield by 15%
+              - Improved PCB image preprocessing pipelines with OpenCV, increasing edge detection accuracy by 20%
   
   
   research:
@@ -231,10 +231,10 @@ params:
             lab: "Security and Artificial Intelligence Laboratory"
             date: "Feb. 2022 - Aug. 2025"
             content: |-
-              - Developed a Metric Learning–based PCB SMT component detection framework, reducing leakage 7% and false alarms 10% versus OCR
-              - Led a team of 5 to build a real-time transaction alert system, achieving 97% accuracy and 90% faster detection using DNN, XAI, and distributed computing
-              - Researched and built a resignation prediction framework with feature extraction and MLP classifier, improving performance by 53% and achieving 94% accuracy
-              - Developed a mobile app using DNN to predict bloom (95% accuracy) and integrate tourism data
+              - Developed a Metric Learning–based PCB SMT component detection framework, reducing leakage by 7% and false alarms by 10% compared with OCR baselines
+              - Led a team of 5 to build a real-time transaction alert system using DNN, XAI, and distributed computing, achieving 97% accuracy and 90% faster detection
+              - Built and evaluated ML models (Logistic Regression, SVM, Random Forest, XGBoost) using cross-validation for employee attrition prediction, achieving 94% accuracy
+              - Built a mobile app powered by DNN models to predict bloom events (95% accuracy) and integrate tourism data
       - company: "Yuan Ze University"
         companyUrl: "https://www.yzu.edu.tw/index.php/en-us/"
         jobs:
@@ -242,7 +242,7 @@ params:
             lab: "Innovation Center for Big Data and Digital Convergence"
             date: "Mar. 2023 - Oct. 2023"
             content: |-
-              - Collaborated with industry to build a PCB microsection measurement system using YOLOv8 and CNNs, optimized system with RabbitMQ/Celery, achieving 95% accuracy and 90% efficiency gain
+              - Collaborated with industry to build a PCB microsection measurement system using YOLOv8 and CNNs, optimized async processing with RabbitMQ/Celery, achieving 95% accuracy and 90% efficiency gain
 
   # Education
   education:
@@ -317,7 +317,7 @@ params:
         modalId: "proj-pcb-measurement"
         modalImages:
           - /images/projects/proj-pcb-measurement.jpg
-          - /images/projects/converter.jpg
+          - /images/projects/proj-pcb-measurement-2.png
         details: |- 
             Microscopic cross-section measurement is used to measure the width of PCB components, but it’s often done by manual visual inspection, which can lead to inconsistent standards and measurement errors. To solve this, we built a deep learning–based microscopic measurement framework to make measurements more consistent and automated.
             
@@ -326,17 +326,41 @@ params:
             In experiments, RMSE was < 2 on the Undercut and Pad datasets, < 3 on Substrate, and < 6 on Copper, helping reduce manual inspection cost and improve PCB quality.
 
       - title: Metric Learning–based PCB SMT Component Detection Framework
-        content: TBD
-        image: /images/projects/converter.jpg
+        content: A Metric Learning-based Incorrect Component Detection (MICD) framework that identifies SMT defects by comparing visual feature similarity instead of relying on traditional OCR.
+        image: /images/projects/proj-micd-1.png
         # featured:
         #   name: Demo
         #   link: https://django-converter.herokuapp.com
         badges:
           - "Metric-Learning"
         modalId: "proj-pcb-smt"
+        modalImages:
+          - /images/projects/proj-micd-1.png
+        # - /images/projects/proj-micd-2.png
         details: |- 
-            TBD
-      
+          # Overview
+          This research collaboration with an SMT (Surface Mount Technology) company addressed a critical industrial challenge. Traditional OCR (Optical Character Recognition) often fails in factory environments due to dust and motion blur, leading to high false alarm rates. I developed the **MICD framework**, which utilizes Metric Learning to compare components against a "Golden Sample" rather than relying on text recognition, effectively reducing false alarms by up to 90%.
+
+          # Problem
+          In SMT production lines, factories rely on OCR to verify component serial numbers. However, OCR struggles when images are blurry, dusty, or obscured—conditions common in real-world manufacturing. This results in excessive false alarms and necessitates costly manual inspections.
+
+          # Solutions
+          To solve this, I developed the **MICD framework**. Instead of "reading" text, the system focuses on **feature similarity learning** through three main stages:
+          
+          * **Preprocessing**: Applied grayscale conversion and sharpening to enhance image clarity.
+          * **Feature Extraction**: Leveraged **Prototypical and Relation Networks** (with a **DenseNet** backbone) to extract robust visual features.
+          * **Comparison**: A "**Golden Sample**" (the ideal reference image) is compared to the target component using **Cosine Similarity**. If the similarity score falls below a threshold, it is flagged.
+
+          # Impact
+          The results demonstrated a significant improvement over standard methods like Google Cloud OCR:
+          
+          * **90% Reduction in False Alarms**: Dramatically decreased errors in dusty conditions compared to traditional OCR.
+          * **54% Improvement in Blurry Conditions**: Significantly more robust performance under focus-related issues.
+          * **Explainability**: Implemented **Grad-CAM** to generate heatmaps, visually confirming that the model focuses on critical component features rather than background noise.
+
+
+
+
       - title: Real-time Transaction Alert System
         content: TBD
         image: /images/projects/profile2.jpg
