@@ -1094,7 +1094,7 @@ Iris Kuo
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card my-3 h-100 project-card" title="PCB Microsection Measurement System" onclick="openModal('proj-pcb-measurement')">
                     <div class="card-head">
-                        <img class="card-img-top" src="/images/projects/proj-pcb-measurement.jpg" alt="PCB Microsection Measurement System">
+                        <img class="card-img-top" src="/images/projects/proj-pcb-measurement-1.png" alt="PCB Microsection Measurement System">
                     </div>
                     <div class="card-body bg-transparent p-3">
                         <div class="pb-2 bg-transparent">
@@ -1123,7 +1123,7 @@ Iris Kuo
                     badges: "[\"YOLOv8\",\"CNN\",\"RabbitMQ\",\"Celery\"]",
                     body: "\"\\u003cp\\u003eMicroscopic cross-section measurement is used to measure the width of PCB components, but it’s often done by manual visual inspection, which can lead to inconsistent standards and measurement errors. To solve this, we built a deep learning–based microscopic measurement framework to make measurements more consistent and automated.\\u003c/p\\u003e\\n\\u003cp\\u003eThe pipeline first uses YOLOv4 to extract the region of interest (ROI) and reduce surrounding noise. Then, CNN models (trained for four different data categories) predict the required coordinate points, and we evaluate performance using RMSE. To make the system scalable and reliable in production, we integrated RabbitMQ + Celery to handle asynchronous job queuing and distributed inference.\\u003c/p\\u003e\\n\\u003cp\\u003eIn experiments, RMSE was \\u0026lt; 2 on the Undercut and Pad datasets, \\u0026lt; 3 on Substrate, and \\u0026lt; 6 on Copper, helping reduce manual inspection cost and improve PCB quality.\\u003c/p\\u003e\\n\"",
                     links: "[]",
-                    images: "[\"/images/projects/proj-pcb-measurement.jpg\",\"/images/projects/proj-pcb-measurement-2.png\"]"
+                    images: "[\"/images/projects/proj-pcb-measurement-1.png\",\"/images/projects/proj-pcb-measurement-2.png\"]"
                 };
             </script>
             
@@ -1151,30 +1151,30 @@ Iris Kuo
                 window.projectDetails["proj-pcb-smt"] = {
                     title: "\"Metric Learning–based PCB SMT Component Detection Framework\"",
                     badges: "[\"Metric-Learning\"]",
-                    body: "\"\\u003ch1 id=\\\"overview\\\"\\u003eOverview\\u003c/h1\\u003e\\n\\u003cp\\u003eThis research collaboration with an SMT (Surface Mount Technology) company addressed a critical industrial challenge. Traditional OCR (Optical Character Recognition) often fails in factory environments due to dust and motion blur, leading to high false alarm rates. I developed the \\u003cstrong\\u003eMICD framework\\u003c/strong\\u003e, which utilizes Metric Learning to compare components against a \\u0026ldquo;Golden Sample\\u0026rdquo; rather than relying on text recognition, effectively reducing false alarms by up to 90%.\\u003c/p\\u003e\\n\\u003ch1 id=\\\"problem\\\"\\u003eProblem\\u003c/h1\\u003e\\n\\u003cp\\u003eIn SMT production lines, factories rely on OCR to verify component serial numbers. However, OCR struggles when images are blurry, dusty, or obscured—conditions common in real-world manufacturing. This results in excessive false alarms and necessitates costly manual inspections.\\u003c/p\\u003e\\n\\u003ch1 id=\\\"solutions\\\"\\u003eSolutions\\u003c/h1\\u003e\\n\\u003cp\\u003eTo solve this, I developed the \\u003cstrong\\u003eMICD framework\\u003c/strong\\u003e. Instead of \\u0026ldquo;reading\\u0026rdquo; text, the system focuses on \\u003cstrong\\u003efeature similarity learning\\u003c/strong\\u003e through three main stages:\\u003c/p\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003ePreprocessing\\u003c/strong\\u003e: Applied grayscale conversion and sharpening to enhance image clarity.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eFeature Extraction\\u003c/strong\\u003e: Leveraged \\u003cstrong\\u003ePrototypical and Relation Networks\\u003c/strong\\u003e (with a \\u003cstrong\\u003eDenseNet\\u003c/strong\\u003e backbone) to extract robust visual features.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eComparison\\u003c/strong\\u003e: A \\u0026ldquo;\\u003cstrong\\u003eGolden Sample\\u003c/strong\\u003e\\u0026rdquo; (the ideal reference image) is compared to the target component using \\u003cstrong\\u003eCosine Similarity\\u003c/strong\\u003e. If the similarity score falls below a threshold, it is flagged.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch1 id=\\\"impact\\\"\\u003eImpact\\u003c/h1\\u003e\\n\\u003cp\\u003eThe results demonstrated a significant improvement over standard methods like Google Cloud OCR:\\u003c/p\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003e90% Reduction in False Alarms\\u003c/strong\\u003e: Dramatically decreased errors in dusty conditions compared to traditional OCR.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003e54% Improvement in Blurry Conditions\\u003c/strong\\u003e: Significantly more robust performance under focus-related issues.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eExplainability\\u003c/strong\\u003e: Implemented \\u003cstrong\\u003eGrad-CAM\\u003c/strong\\u003e to generate heatmaps, visually confirming that the model focuses on critical component features rather than background noise.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\"",
+                    body: "\"\\u003ch2 id=\\\"overview\\\"\\u003eOverview\\u003c/h2\\u003e\\n\\u003cp\\u003eThis research collaboration with an SMT (Surface Mount Technology) company addressed a critical industrial challenge. Traditional OCR (Optical Character Recognition) often fails in factory environments due to dust and motion blur, leading to high false alarm rates. I developed the \\u003cstrong\\u003eMICD framework\\u003c/strong\\u003e, which utilizes Metric Learning to compare components against a \\u0026ldquo;Golden Sample\\u0026rdquo; rather than relying on text recognition, effectively reducing false alarms by up to 90%.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"problem\\\"\\u003eProblem\\u003c/h2\\u003e\\n\\u003cp\\u003eIn SMT production lines, factories rely on OCR to verify component serial numbers. However, OCR struggles when images are blurry, dusty, or obscured—conditions common in real-world manufacturing. This results in excessive false alarms and necessitates costly manual inspections.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"solutions\\\"\\u003eSolutions\\u003c/h2\\u003e\\n\\u003cp\\u003eTo solve this, I developed the \\u003cstrong\\u003eMICD framework\\u003c/strong\\u003e. Instead of \\u0026ldquo;reading\\u0026rdquo; text, the system focuses on \\u003cstrong\\u003efeature similarity learning\\u003c/strong\\u003e through three main stages:\\u003c/p\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003ePreprocessing\\u003c/strong\\u003e: Applied grayscale conversion and sharpening to enhance image clarity.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eFeature Extraction\\u003c/strong\\u003e: Leveraged \\u003cstrong\\u003ePrototypical and Relation Networks\\u003c/strong\\u003e (with a \\u003cstrong\\u003eDenseNet\\u003c/strong\\u003e backbone) to extract robust visual features.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eComparison\\u003c/strong\\u003e: A \\u0026ldquo;\\u003cstrong\\u003eGolden Sample\\u003c/strong\\u003e\\u0026rdquo; (the ideal reference image) is compared to the target component using \\u003cstrong\\u003eCosine Similarity\\u003c/strong\\u003e. If the similarity score falls below a threshold, it is flagged.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"impact\\\"\\u003eImpact\\u003c/h2\\u003e\\n\\u003cp\\u003eThe results demonstrated a significant improvement over standard methods like Google Cloud OCR:\\u003c/p\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003e90% Reduction in False Alarms\\u003c/strong\\u003e: Dramatically decreased errors in dusty conditions compared to traditional OCR.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003e54% Improvement in Blurry Conditions\\u003c/strong\\u003e: Significantly more robust performance under focus-related issues.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eExplainability\\u003c/strong\\u003e: Implemented \\u003cstrong\\u003eGrad-CAM\\u003c/strong\\u003e to generate heatmaps, visually confirming that the model focuses on critical component features rather than background noise.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\"",
                     links: "[]",
                     images: "[\"/images/projects/proj-micd-1.png\"]"
                 };
             </script>
             
             <div class="col-lg-4 col-md-6 my-3">
-                <div class="card my-3 h-100 project-card" title="Real-time Transaction Alert System" onclick="openModal('proj-transaction-alert')">
+                <div class="card my-3 h-100 project-card" title="Spatio-Temporal Vision System for SOP Compliance and Defect Detection" onclick="openModal('proj-st-scd')">
                     <div class="card-head">
-                        <img class="card-img-top" src="/images/projects/profile2.jpg" alt="Real-time Transaction Alert System">
+                        <img class="card-img-top" src="/images/projects/proj-st-scd-1.png" alt="Spatio-Temporal Vision System for SOP Compliance and Defect Detection">
                     </div>
                     <div class="card-body bg-transparent p-3">
                         <div class="pb-2 bg-transparent">
                             
-                            <span class="badge badge-secondary">XAI</span>
+                            <span class="badge badge-secondary">YOLOv8</span>
                             
-                            <span class="badge badge-secondary">DNN</span>
+                            <span class="badge badge-secondary">LSTM</span>
                             
-                            <span class="badge badge-secondary">distributed computing</span>
+                            <span class="badge badge-secondary">Docker</span>
                             
                         </div>
-                        <h5 class="card-title bg-transparent mt-1">Real-time Transaction Alert System</h5>
+                        <h5 class="card-title bg-transparent mt-1">Spatio-Temporal Vision System for SOP Compliance and Defect Detection</h5>
                         <div class="card-text bg-transparent secondary-font">
-                            TBD
+                            The system ensures operators strictly follow SOP while simultaneously detecting film residues on the board surface.
                         </div>
                     </div>
                     
@@ -1182,12 +1182,12 @@ Iris Kuo
             </div>
             <script>
                 window.projectDetails = window.projectDetails || {};
-                window.projectDetails["proj-transaction-alert"] = {
-                    title: "\"Real-time Transaction Alert System\"",
-                    badges: "[\"XAI\",\"DNN\",\"distributed computing\"]",
-                    body: "\"TBD\"",
+                window.projectDetails["proj-st-scd"] = {
+                    title: "\"Spatio-Temporal Vision System for SOP Compliance and Defect Detection\"",
+                    badges: "[\"YOLOv8\",\"LSTM\",\"Docker\"]",
+                    body: "\"\\u003ch2 id=\\\"overview\\\"\\u003eOverview\\u003c/h2\\u003e\\n\\u003cp\\u003eDevelopment of an AI-driven vision system to monitor manual assembly lines. The system ensures operators strictly follow Standard Operating Procedures (SOP)—specifically a Pick-Peel-Flip-Peel sequence—while simultaneously detecting microscopic film residues on the board surface.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"problem\\\"\\u003eProblem\\u003c/h2\\u003e\\n\\u003cp\\u003eManual peeling of protective films is prone to human error, such as skipping the flip-side peeling or leaving residual fragments, leading to downstream assembly failures and reduced throughput.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"system-architecture\\\"\\u003eSystem Architecture\\u003c/h2\\u003e\\n\\u003cp\\u003eThe system employs a \\u003cstrong\\u003eTwo-Stage Spatio-Temporal Pipeline\\u003c/strong\\u003e:\\u003c/p\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eStage 1 (Spatial Perception):\\u003c/strong\\u003e A \\u003cstrong\\u003eYOLOv8-seg\\u003c/strong\\u003e model performs real-time instance segmentation to identify the board (PCBA), the operator’s hands, and any film residues.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eStage 2 (Temporal Reasoning):\\u003c/strong\\u003e A \\u003cstrong\\u003eMany-to-One LSTM\\u003c/strong\\u003e network processes the sequence of coordinated data (bounding box coordinates, hand trajectories, and residue area) over a sliding window of 60 frames to classify the current action state.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eLogic Controller:\\u003c/strong\\u003e A Finite State Machine (FSM) triggers alerts if the LSTM detects an out-of-order action or if YOLOv8 detects residue after a \\u0026ldquo;peel\\u0026rdquo; action is completed.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"impact\\\"\\u003eImpact\\u003c/h2\\u003e\\n\\u003cp\\u003eYield Improvement: Achieved a 15% increase in product yield by eliminating human-error-related defects.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"tech-stack\\\"\\u003eTech Stack\\u003c/h2\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eVision:\\u003c/strong\\u003e YOLOv8-segmentation (Ultralytics)\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eSequence Modeling:\\u003c/strong\\u003e PyTorch (LSTM / GRU)\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eDeployment:\\u003c/strong\\u003e NVIDIA TensorRT, OpenCV\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eInfrastructure:\\u003c/strong\\u003e Python, Docker, MQTT (for factory floor alerts)\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\"",
                     links: "[]",
-                    images: "[]"
+                    images: "[\"/images/projects/proj-st-scd-1.png\"]"
                 };
             </script>
             

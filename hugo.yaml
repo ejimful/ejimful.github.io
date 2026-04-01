@@ -305,7 +305,7 @@ params:
     items:
       - title: PCB Microsection Measurement System
         content: A deep learning–based microscopic measurement framework to make measurements more consistent and automated.
-        image: /images/projects/proj-pcb-measurement.jpg
+        image: /images/projects/proj-pcb-measurement-1.png
         # featured:
         #   name: Demo
         #   link: https://hugo-profile.netlify.app
@@ -316,7 +316,7 @@ params:
           - "Celery"
         modalId: "proj-pcb-measurement"
         modalImages:
-          - /images/projects/proj-pcb-measurement.jpg
+          - /images/projects/proj-pcb-measurement-1.png
           - /images/projects/proj-pcb-measurement-2.png
         details: |- 
             Microscopic cross-section measurement is used to measure the width of PCB components, but it’s often done by manual visual inspection, which can lead to inconsistent standards and measurement errors. To solve this, we built a deep learning–based microscopic measurement framework to make measurements more consistent and automated.
@@ -338,42 +338,62 @@ params:
           - /images/projects/proj-micd-1.png
         # - /images/projects/proj-micd-2.png
         details: |- 
-          # Overview
+          ## Overview
           This research collaboration with an SMT (Surface Mount Technology) company addressed a critical industrial challenge. Traditional OCR (Optical Character Recognition) often fails in factory environments due to dust and motion blur, leading to high false alarm rates. I developed the **MICD framework**, which utilizes Metric Learning to compare components against a "Golden Sample" rather than relying on text recognition, effectively reducing false alarms by up to 90%.
 
-          # Problem
+          ## Problem
           In SMT production lines, factories rely on OCR to verify component serial numbers. However, OCR struggles when images are blurry, dusty, or obscured—conditions common in real-world manufacturing. This results in excessive false alarms and necessitates costly manual inspections.
 
-          # Solutions
+          ## Solutions
           To solve this, I developed the **MICD framework**. Instead of "reading" text, the system focuses on **feature similarity learning** through three main stages:
           
           * **Preprocessing**: Applied grayscale conversion and sharpening to enhance image clarity.
           * **Feature Extraction**: Leveraged **Prototypical and Relation Networks** (with a **DenseNet** backbone) to extract robust visual features.
           * **Comparison**: A "**Golden Sample**" (the ideal reference image) is compared to the target component using **Cosine Similarity**. If the similarity score falls below a threshold, it is flagged.
 
-          # Impact
+          ## Impact
           The results demonstrated a significant improvement over standard methods like Google Cloud OCR:
           
           * **90% Reduction in False Alarms**: Dramatically decreased errors in dusty conditions compared to traditional OCR.
           * **54% Improvement in Blurry Conditions**: Significantly more robust performance under focus-related issues.
           * **Explainability**: Implemented **Grad-CAM** to generate heatmaps, visually confirming that the model focuses on critical component features rather than background noise.
 
-
-
-
-      - title: Real-time Transaction Alert System
-        content: TBD
-        image: /images/projects/profile2.jpg
+      - title: Spatio-Temporal Vision System for SOP Compliance and Defect Detection
+        content: The system ensures operators strictly follow SOP while simultaneously detecting film residues on the board surface.
+        image: /images/projects/proj-st-scd-1.png
         # featured:
         #   name: Demo V2
         #   link: https://hugo-profile-2.netlify.app
         badges:
-          - "XAI"
-          - "DNN"
-          - "distributed computing"
-        modalId: "proj-transaction-alert"
+          - YOLOv8
+          - LSTM
+          - Docker
+        modalId: "proj-st-scd"
+        modalImages:
+          - /images/projects/proj-st-scd-1.png
         details: |-
-            TBD
+            ## Overview
+            Development of an AI-driven vision system to monitor manual assembly lines. The system ensures operators strictly follow Standard Operating Procedures (SOP)—specifically a Pick-Peel-Flip-Peel sequence—while simultaneously detecting microscopic film residues on the board surface.
+
+            ## Problem
+            Manual peeling of protective films is prone to human error, such as skipping the flip-side peeling or leaving residual fragments, leading to downstream assembly failures and reduced throughput.
+
+            ## System Architecture
+            The system employs a **Two-Stage Spatio-Temporal Pipeline**:
+            * **Stage 1 (Spatial Perception):** A **YOLOv8-seg** model performs real-time instance segmentation to identify the board (PCBA), the operator’s hands, and any film residues.
+            * **Stage 2 (Temporal Reasoning):** A **Many-to-One LSTM** network processes the sequence of coordinated data (bounding box coordinates, hand trajectories, and residue area) over a sliding window of 60 frames to classify the current action state.
+            * **Logic Controller:** A Finite State Machine (FSM) triggers alerts if the LSTM detects an out-of-order action or if YOLOv8 detects residue after a "peel" action is completed.
+
+            ## Impact
+            Yield Improvement: Achieved a 15% increase in product yield by eliminating human-error-related defects.
+
+            ## Tech Stack
+            * **Vision:** YOLOv8-segmentation (Ultralytics)
+            * **Sequence Modeling:** PyTorch (LSTM / GRU)
+            * **Deployment:** NVIDIA TensorRT, OpenCV
+            * **Infrastructure:** Python, Docker, MQTT (for factory floor alerts)
+
+
       
       - title: Red Light, Green Light Game System based on IoT Devices
         content: TBD
