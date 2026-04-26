@@ -185,6 +185,8 @@ Iris Kuo
             
             <a class="navbar-brand primary-font text-wrap" href="/">
                 
+                <img src="/fav.png" width="30" height="30"
+                    class="d-inline-block align-top">
                 Iris Kuo
                 
             </a>
@@ -350,7 +352,7 @@ Iris Kuo
                 <div class="row">
                     <div class="col-auto h-100">
                         
-                        <a href="/files/IrisKuo_v2.pdf" class="btn" ZgotmplZ
+                        <a href="/files/Resume_IrisKuo_SWE_v4.pdf" class="btn" ZgotmplZ
 			  
                           target="_blank"
                           >
@@ -681,9 +683,9 @@ Iris Kuo
                 Here are a few technologies I&#39;ve been working with recently:
                 <ul>
                     
-                    <li>C++</li>
-                    
                     <li>Python</li>
+                    
+                    <li>C++</li>
                     
                     <li>HTML/ CSS</li>
                     
@@ -779,10 +781,9 @@ Iris Kuo
                                         </div>
                                         <div class="pb-2 pb-3">
                                             <ul>
-<li>Built and maintained end-to-end data pipelines in Python and PL/SQL to support scalable analytics workflows, increasing cross-team adoption by 60%</li>
-<li>Optimized complex SQL queries and data transformation workflows, reducing report data load time by 38%</li>
-<li>Designed and implemented a production RAG pipeline to improve BI data retrieval efficiency by 25%</li>
-<li>Automated reporting pipelines in Python and SQL, reducing turnaround time by 40%</li>
+<li>Architected a LLM-RAG pipeline using FastAPI and FAISS to automate retrieval, boosting efficiency by 25%</li>
+<li>Built 10+ ETL pipelines in Python &amp; SQL with automated error handling, boosting delivery by 40%</li>
+<li>Refactored complex SQL queries and integrated Tableau visualization layers, cutting data load time by 38%</li>
 </ul>
 
                                         </div>
@@ -823,8 +824,8 @@ Iris Kuo
                                         </div>
                                         <div class="pb-2 pb-3">
                                             <ul>
-<li>Designed and deployed a real-time computer vision pipeline using YOLOv8 and LSTM to detect operator gestures, ensuring SOP compliance and improving product yield by 15%</li>
-<li>Improved PCB image preprocessing pipelines with OpenCV, increasing edge detection accuracy by 20%</li>
+<li>Architected a highly concurrent spatio-temporal vision system (YOLOv8, LSTM) for edge deployment, automating SOP compliance and defect gating to drive a 15% increase in production yield</li>
+<li>Engineered image pipelines in Python/OpenCV, reducing compute overhead for real-time edge inference</li>
 </ul>
 
                                         </div>
@@ -921,10 +922,9 @@ Iris Kuo
                                         </div>
                                         <div class="pb-2 pb-3">
                                             <ul>
-<li>Developed a Metric Learning–based PCB SMT component detection framework, reducing leakage by 7% and false alarms by 10% compared with OCR baselines</li>
-<li>Led a team of 5 to build a real-time transaction alert system using DNN, XAI, and distributed computing, achieving 97% accuracy and 90% faster detection</li>
-<li>Built and evaluated ML models (Logistic Regression, SVM, Random Forest, XGBoost) using cross-validation for employee attrition prediction, achieving 94% accuracy</li>
-<li>Built a mobile app powered by DNN models to predict bloom events (95% accuracy) and integrate tourism data</li>
+<li>Developed a modular Metric Learning framework for PCB SMT detection to replace legacy OCR systems, achieving a 90% reduction in false alarms</li>
+<li>Developed an end-to-end ML attrition prediction framework featuring automated preprocessing and recursive feature elimination; achieved 94% accuracy across diverse datasets</li>
+<li>Led a team of 5 to build a DNN-powered mobile app with Flutter and FastAPI, achieving 95% bloom prediction accuracy using scraped datasets</li>
 </ul>
 
                                         </div>
@@ -966,7 +966,7 @@ Iris Kuo
                                         </div>
                                         <div class="pb-2 pb-3">
                                             <ul>
-<li>Collaborated with industry to build a PCB microsection measurement system using YOLOv8 and CNNs, optimized async processing with RabbitMQ/Celery, achieving 95% accuracy and 90% efficiency gain</li>
+<li>Built an asynchronous PCB microsection measurement system using FastAPI, RabbitMQ, and Celery, decoupling heavy AI inference to scale inference throughput by 90% and deliver 95% measurement accuracy</li>
 </ul>
 
                                         </div>
@@ -1009,13 +1009,6 @@ Iris Kuo
                                 
 
                                 
-                                <div class="py-1">
-                                    GPA:
-                                    <i>
-                                        <small>3.9 out of 4.0</small>
-                                    </i> 
-                                </div>
-                                
                                 <div class="py-1 education-content">
                                     <p>Related Courses</p>
 <ul>
@@ -1052,13 +1045,6 @@ Iris Kuo
                                 </a>
                                 
 
-                                
-                                <div class="py-1">
-                                    GPA:
-                                    <i>
-                                        <small>3.64 out of 4.0</small>
-                                    </i> 
-                                </div>
                                 
                                 <div class="py-1 education-content">
                                     <p>Wrote and published four articles on global Artificial Intelligence conferences.</p>
@@ -1099,7 +1085,7 @@ Iris Kuo
                     <div class="card-body bg-transparent p-3">
                         <div class="pb-2 bg-transparent">
                             
-                            <span class="badge badge-secondary">YOLOv8</span>
+                            <span class="badge badge-secondary">YOLOv5</span>
                             
                             <span class="badge badge-secondary">CNN</span>
                             
@@ -1120,8 +1106,8 @@ Iris Kuo
                 window.projectDetails = window.projectDetails || {};
                 window.projectDetails["proj-pcb-measurement"] = {
                     title: "\"PCB Microsection Measurement System\"",
-                    badges: "[\"YOLOv8\",\"CNN\",\"RabbitMQ\",\"Celery\"]",
-                    body: "\"\\u003cp\\u003eMicroscopic cross-section measurement is used to measure the width of PCB components, but it’s often done by manual visual inspection, which can lead to inconsistent standards and measurement errors. To solve this, we built a deep learning–based microscopic measurement framework to make measurements more consistent and automated.\\u003c/p\\u003e\\n\\u003cp\\u003eThe pipeline first uses YOLOv4 to extract the region of interest (ROI) and reduce surrounding noise. Then, CNN models (trained for four different data categories) predict the required coordinate points, and we evaluate performance using RMSE. To make the system scalable and reliable in production, we integrated RabbitMQ + Celery to handle asynchronous job queuing and distributed inference.\\u003c/p\\u003e\\n\\u003cp\\u003eIn experiments, RMSE was \\u0026lt; 2 on the Undercut and Pad datasets, \\u0026lt; 3 on Substrate, and \\u0026lt; 6 on Copper, helping reduce manual inspection cost and improve PCB quality.\\u003c/p\\u003e\\n\"",
+                    badges: "[\"YOLOv5\",\"CNN\",\"RabbitMQ\",\"Celery\"]",
+                    body: "\"\\u003cp\\u003eMicroscopic cross-section measurement is used to measure the width of PCB components, but it’s often done by manual visual inspection, which can lead to inconsistent standards and measurement errors. To solve this, we built a deep learning–based microscopic measurement framework to make measurements more consistent and automated.\\u003c/p\\u003e\\n\\u003cp\\u003eThe pipeline first uses YOLOv5 to extract the region of interest (ROI) and reduce surrounding noise. Then, CNN models (trained for four different data categories) predict the required coordinate points, and we evaluate performance using RMSE. To make the system scalable and reliable in production, we integrated RabbitMQ + Celery to handle asynchronous job queuing and distributed inference.\\u003c/p\\u003e\\n\\u003cp\\u003eIn experiments, RMSE was \\u0026lt; 2 on the Undercut and Pad datasets, \\u0026lt; 3 on Substrate, and \\u0026lt; 6 on Copper, helping reduce manual inspection cost and improve PCB quality.\\u003c/p\\u003e\\n\"",
                     links: "[]",
                     images: "[\"/images/projects/proj-pcb-measurement-1.png\",\"/images/projects/proj-pcb-measurement-2.png\"]"
                 };
@@ -1192,19 +1178,25 @@ Iris Kuo
             </script>
             
             <div class="col-lg-4 col-md-6 my-3">
-                <div class="card my-3 h-100 project-card" title="Red Light, Green Light Game System based on IoT Devices" onclick="openModal('proj-iot-game')">
+                <div class="card my-3 h-100 project-card" title="Real-time Transaction Alert System" onclick="openModal('proj-aml')">
                     <div class="card-head">
-                        <img class="card-img-top" src="/images/projects/profile2.jpg" alt="Red Light, Green Light Game System based on IoT Devices">
+                        <img class="card-img-top" src="/images/projects/proj-aml-1.png" alt="Real-time Transaction Alert System">
                     </div>
                     <div class="card-body bg-transparent p-3">
                         <div class="pb-2 bg-transparent">
                             
-                            <span class="badge badge-secondary">TBD</span>
+                            <span class="badge badge-secondary">Python</span>
+                            
+                            <span class="badge badge-secondary">RabbitMQ</span>
+                            
+                            <span class="badge badge-secondary">Celery</span>
+                            
+                            <span class="badge badge-secondary">XAI</span>
                             
                         </div>
-                        <h5 class="card-title bg-transparent mt-1">Red Light, Green Light Game System based on IoT Devices</h5>
+                        <h5 class="card-title bg-transparent mt-1">Real-time Transaction Alert System</h5>
                         <div class="card-text bg-transparent secondary-font">
-                            TBD
+                            A real-time Anti-Money Laundering (AML) detection system integrating DNN and XAI.
                         </div>
                     </div>
                     
@@ -1212,12 +1204,12 @@ Iris Kuo
             </div>
             <script>
                 window.projectDetails = window.projectDetails || {};
-                window.projectDetails["proj-iot-game"] = {
-                    title: "\"Red Light, Green Light Game System based on IoT Devices\"",
-                    badges: "[\"TBD\"]",
-                    body: "\"TBD\"",
+                window.projectDetails["proj-aml"] = {
+                    title: "\"Real-time Transaction Alert System\"",
+                    badges: "[\"Python\",\"RabbitMQ\",\"Celery\",\"XAI\"]",
+                    body: "\"\\u003ch2 id=\\\"overview\\\"\\u003eOverview\\u003c/h2\\u003e\\n\\u003cp\\u003eA real-time Anti-Money Laundering (AML) detection system integrating Deep Neural Networks (DNN) and Explainable AI (XAI). The project implements a distributed backend architecture to ensure low-latency preprocessing and transparent decision analysis in high-concurrency environments. This system achieving 97% accuracy and 90% faster detection time.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"problem\\\"\\u003eProblem\\u003c/h2\\u003e\\n\\u003cp\\u003eTraditional AML processes rely heavily on manual review, which is time-consuming and expensive. Additionally, deep learning models are often seen as \\u0026ldquo;black boxes\\u0026rdquo; , and severe data imbalance in financial datasets makes it difficult for models to accurately detect rare abnormal transactions.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"system-architecture\\\"\\u003eSystem Architecture\\u003c/h2\\u003e\\n\\u003cp\\u003eTo handle high-volume financial data without performance lag, I designed a decoupled, microservices-oriented architecture. Here is how the data flows through the system:\\u003c/p\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eDecoupled Entry Point (FastAPI + RabbitMQ)\\u003c/strong\\u003e \\u003cbr\\u003e\\nWhen a transaction occurs, FastAPI ingests the raw data and immediately offloads it to RabbitMQ. This asynchronous \\u0026ldquo;waiting room\\u0026rdquo; ensures the front-end remains responsive even during sudden traffic spikes, preventing system crashes.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eScalable Processing (Dockerized Celery Workers)\\u003c/strong\\u003e \\u003cbr\\u003e\\nMultiple Celery Workers—isolated in Docker containers—run in parallel to pull tasks from the queue. They handle the complex preprocessing and feature engineering, which allowed us to cut end-to-end latency by 90%.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eIntelligent Inference \\u0026amp; XAI (DNN + SHAP)\\u003c/strong\\u003e \\u003cbr\\u003e\\nOnce the data is cleaned, it is processed by a Deep Neural Network (DNN) optimized for high recall. If a transaction is flagged as suspicious, the system automatically triggers the SHAP engine to provide a transparent, feature-level explanation for the alert.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eAudit-Ready Storage (PostgreSQL)\\u003c/strong\\u003e \\u003cbr\\u003e\\nThe final results—including the transaction details, the model’s prediction, and the SHAP interpretability report—are logged into PostgreSQL. This creates a comprehensive audit trail for the bank’s compliance and legal teams.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"tech-stack\\\"\\u003eTech Stack\\u003c/h2\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eMachine Learning:\\u003c/strong\\u003e DNN (Deep Neural Network), Scikit-learn\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eXAI Tools:\\u003c/strong\\u003e SHAP\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eData Processing:\\u003c/strong\\u003e Python (Pandas/NumPy), SMOTE (for data augmentation)\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003cstrong\\u003eDistributed Systems:\\u003c/strong\\u003e RabbitMQ, Celery, Docker\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"challenges\\\"\\u003eChallenges\\u003c/h2\\u003e\\n\\u003cp\\u003eEnsuring consistency of preprocessing logic across distributed nodes under millisecond-level latency requirements, and overcoming training difficulties caused by extremely sparse money-laundering data.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"solutions\\\"\\u003eSolutions\\u003c/h2\\u003e\\n\\u003cp\\u003eImplemented SMOTE to balance the dataset by oversampling the minority class. Built an asynchronous parallel pipeline using RabbitMQ and Celery. Leveraged SHAP to identify \\u0026ldquo;Payment Format\\u0026rdquo; as the most critical feature, providing the transparency required for regulatory compliance.\\u003c/p\\u003e\\n\\u003ch2 id=\\\"imapact\\\"\\u003eImapact\\u003c/h2\\u003e\\n\\u003cp\\u003eThe DNN model achieved a recall of 0.94 and 97% accuracy. The distributed architecture improved end-to-end detection speed by 90%, significantly optimizing automation efficiency for financial institutions.\\u003c/p\\u003e\\n\"",
                     links: "[]",
-                    images: "[]"
+                    images: "[\"/images/projects/proj-aml-1.png\"]"
                 };
             </script>
             
@@ -1483,6 +1475,13 @@ metaEl.innerHTML = badges.map(b => `<span class="modal__chip">${b}</span>`).join
 </div><div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-4 text-center">
+            
+                <div class="pb-2">
+                    <a href="http://localhost:1313/" title="Iris Kuo ">
+                        <img alt="Footer logo" src="/fav.png"
+                            height="40px" width="40px">
+                    </a>
+                </div>
             
             &copy; 2026  All rights reserved
             <div class="text-secondary">
