@@ -170,8 +170,8 @@ params:
       newPage: true
     socialLinks:
       fontAwesomeIcons:
-        - icon: fab fa-github
-          url: https://github.com/ejimful
+        # - icon: fab fa-github
+        # url: https://github.com/ejimful
         - icon: fab fa-linkedin
           url: https://www.linkedin.com/in/iris-kuo/
 
@@ -181,18 +181,18 @@ params:
     title: "About Me"
     image: "/images/me.jpg"
     content: |-
-      I am a Computer Science graduate student at The Ohio State University specializing in efficient machine learning systems and AI-driven applications.
-
-      I have built end-to-end data pipelines, real-time vision systems, and distributed AI solutions across industry and research environments.
+      I’m a software engineer with experience in backend development, AI/ML systems, cloud infrastructure, and data engineering. 
+      
+      My work has included building full-stack platforms, Spring Boot microservices, AWS-based AI solutions, LLM/RAG pipelines, and computer vision systems.
     skills:
       enable: true
       title: "Here are a few technologies I've been working with recently:"
       items:
         - "Python"
-        - "C++"
+        - "Java"
         - "HTML/ CSS"
         - "SQL"
-        - "JavaScript"
+        - "Typescript"
         - "React"
 
   # Experience
@@ -200,10 +200,15 @@ params:
     enable: true
     # title: "Custom Name"  
     items:
+      - company: "AICure"
+        companyUrl: "https://aicure.com"
+        jobs:
+          - name: "AI Software Engineering Intern"
+            date: "May 2026 - Aug 2026"
       - company: "MiTAC"
         companyUrl: "https://www.mitaccomputing.com"
         jobs:
-          - name: "Data Science Intern"
+          - name: "Software/Data Engineering Intern"
             date: "Feb 2024 - Jan 2025"
             content: |
               - Architected a LLM-RAG pipeline using FastAPI and FAISS to automate retrieval, boosting efficiency by 25%
@@ -212,8 +217,8 @@ params:
       - company: "Avary Holding"
         companyUrl: "https://www.avaryholding.com/en/"
         jobs:
-          - name: "Artificial Intelligence Intern"
-            date: "JUL 2023 - AUG 2023"
+          - name: "AI Software Engineering Intern"
+            date: "Jul 2023 - Aug 2023"
             content: |
               - Architected a highly concurrent spatio-temporal vision system (YOLOv8, LSTM) for edge deployment, automating SOP compliance and defect gating to drive a 15% increase in production yield
               - Engineered image pipelines in Python/OpenCV, reducing compute overhead for real-time edge inference
@@ -227,7 +232,7 @@ params:
         jobs:
           - name: "Research Assistant"
             lab: "Security and Artificial Intelligence Laboratory"
-            date: "Feb. 2022 - Aug. 2025"
+            date: "Feb 2022 - Aug 2025"
             content: |-
               - Developed a modular Metric Learning framework for PCB SMT detection to replace legacy OCR systems, achieving a 90% reduction in false alarms
               - Developed an end-to-end ML attrition prediction framework featuring automated preprocessing and recursive feature elimination; achieved 94% accuracy across diverse datasets
@@ -237,7 +242,7 @@ params:
         jobs:
           - name: "Research Assistant"
             lab: "Innovation Center for Big Data and Digital Convergence"
-            date: "Mar. 2023 - Oct. 2023"
+            date: "Mar 2023 - Oct 2023"
             content: |-
               - Built an asynchronous PCB microsection measurement system using FastAPI, RabbitMQ, and Celery, decoupling heavy AI inference to scale inference throughput by 90% and deliver 95% measurement accuracy
   # Education
@@ -256,6 +261,7 @@ params:
             - Advanced Operating Systems
             - Algorithm
             - Programming Language
+            - Machine Learning
       
       - title: "Bachelor of Science in Computer Science and Engineering"
         school:
