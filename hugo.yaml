@@ -165,7 +165,7 @@ params:
     button:
       enable: true
       name: "Resume"
-      url: "/files/Resume_IrisKuo_SWE_v4.pdf"
+      url: "/files/Resume_IrisKuo_SWE-3.pdf"
       download: false
       newPage: true
     socialLinks:
@@ -205,6 +205,11 @@ params:
         jobs:
           - name: "AI Software Engineering Intern"
             date: "May 2026 - Aug 2026"
+            content: |
+              - Implemented a Flutter app and React portal enabling patients to submit weight-verification images and clinicians to monitor progress and guide treatment
+              - Built Spring Boot REST APIs and MySQL models for patient, medication, and weight-verification workflows
+              - Integrated AWS S3 and Bedrock to verify patient-submitted scale images at 500+ submissions per day
+              - Automated EC2 deployments via GitHub Actions, CodePipeline, ECR and CloudFormation, cutting release time by 90%
       - company: "MiTAC"
         companyUrl: "https://www.mitaccomputing.com"
         jobs:
@@ -305,7 +310,7 @@ params:
     items:
       - title: PCB Microsection Measurement System
         content: A deep learning–based microscopic measurement framework to make measurements more consistent and automated.
-        image: /images/projects/proj-pcb-measurement-1.png
+        image: /images/projects/proj-pcb-measurement-3.png
         # featured:
         #   name: Demo
         #   link: https://hugo-profile.netlify.app
@@ -316,14 +321,115 @@ params:
           - "Celery"
         modalId: "proj-pcb-measurement"
         modalImages:
+          - /images/projects/proj-pcb-measurement-3.png
           - /images/projects/proj-pcb-measurement-1.png
           - /images/projects/proj-pcb-measurement-2.png
         details: |- 
-            Microscopic cross-section measurement is used to measure the width of PCB components, but it’s often done by manual visual inspection, which can lead to inconsistent standards and measurement errors. To solve this, we built a deep learning–based microscopic measurement framework to make measurements more consistent and automated.
-            
-            The pipeline first uses YOLOv5 to extract the region of interest (ROI) and reduce surrounding noise. Then, CNN models (trained for four different data categories) predict the required coordinate points, and we evaluate performance using RMSE. To make the system scalable and reliable in production, we integrated RabbitMQ + Celery to handle asynchronous job queuing and distributed inference.
-            
-            In experiments, RMSE was < 2 on the Undercut and Pad datasets, < 3 on Substrate, and < 6 on Copper, helping reduce manual inspection cost and improve PCB quality.
+            ## Overview
+
+            An automated **PCB Microsection Measurement System** that combines computer vision, deep learning, and asynchronous backend processing to replace manual inspection workflows.
+
+            The system uses **YOLOv5** to detect measurement regions of interest (ROIs) and a **CNN regression model** to estimate PCB measurements automatically. A distributed inference pipeline built with **FastAPI, Redis, and RQ workers** enables multiple inspection jobs to be processed asynchronously and reliably.
+
+            The system reduced **manual inspection time by 90%** and **measurement errors by 95%**.
+
+            ---
+
+            ## Problem
+
+            PCB microsection inspection traditionally requires engineers to manually identify measurement regions and measure features from microscope images. This process is repetitive, time-consuming, and prone to human inconsistency.
+
+            Several challenges make automation difficult:
+
+            - Measurement regions can appear at different positions and scales across PCB images.
+            - Raw microscope images contain irrelevant background areas that can interfere with measurement models.
+            - Manual measurements may vary between operators.
+            - Running computer vision models directly inside API requests can cause long response times and poor scalability when multiple inspection jobs arrive simultaneously.
+
+            The goal of this project was to build an automated system that could reliably identify measurement regions, estimate measurements, and process multiple inspection requests without blocking the application.
+
+            ---
+
+            ## System Architecture
+            The system follows an **asynchronous inference architecture** designed to separate API requests from computationally expensive model processing.
+
+            - **API Layer — FastAPI**  
+              Receives PCB microsection images and creates measurement jobs for asynchronous processing.
+
+            - **Task Queue — Redis + RQ**  
+              Decouples incoming requests from model inference, allowing multiple jobs to be processed without blocking the API.
+
+            - **ML Inference Pipeline — YOLOv5 + CNN**  
+              YOLOv5 detects the target measurement region, and a CNN regression model estimates the final PCB measurement from the detected ROI.
+
+            - **Worker Layer — RQ Workers**  
+              Processes queued inference jobs in parallel and supports retrying failed tasks.
+
+            - **Data Layer — MySQL**  
+              Stores job status and measurement results for tracking and retrieval.
+
+            The overall flow is:
+
+            ```text
+            PCB Image
+              ↓
+            FastAPI
+              ↓
+            Redis / RQ
+              ↓
+            RQ Workers
+              ↓
+            YOLOv5 + CNN
+              ↓
+            MySQL
+              ↓
+            Measurement Result
+            ```
+
+            ---
+
+            ## Tech Stack
+
+            - **Backend:** FastAPI
+            - **Machine Learning:** YOLOv5, CNN Regression, PyTorch
+            - **Computer Vision:** OpenCV
+            - **Asynchronous Processing:** Redis, RQ
+            - **Database:** MySQL
+            - **Data Processing:** Python, NumPy
+            - **Deployment:** Docker
+
+            ---
+
+            ## Challenges
+
+            One of the main challenges was building a reliable measurement pipeline from microscope images where the target region could appear at different positions, scales, and visual conditions.
+
+            Another challenge was integrating computationally expensive model inference into a backend service without blocking incoming API requests.
+
+            The system also needed to handle inference failures gracefully while maintaining accurate job status and measurement records.
+
+            ---
+
+            ## Solutions
+
+            I implemented a **two-stage computer vision pipeline** where YOLOv5 first identifies the measurement region and a CNN regression model performs measurement inference only on the detected ROI.
+
+            This reduces irrelevant visual information and allows the regression model to focus on the target PCB structure.
+
+            To prevent model inference from blocking API requests, I built an **asynchronous processing architecture using FastAPI, Redis, and RQ workers**, allowing multiple inspection jobs to run in parallel.
+
+            I also implemented **automatic retries and MySQL-based job tracking** to improve reliability and maintain a complete record of each measurement request.
+
+            Together, these improvements reduced **manual inspection time by 90%** and **measurement errors by 95%**.
+
+            ---
+
+            ## Key Results
+
+            - Reduced manual PCB inspection time by **90%**
+            - Reduced measurement errors by **95%**
+            - Built an asynchronous inference pipeline using **FastAPI, Redis, and RQ**
+            - Combined **YOLOv5 ROI detection + CNN regression** for automated PCB measurement
 
       - title: Metric Learning–based PCB SMT Component Detection Framework
         content: A Metric Learning-based Incorrect Component Detection (MICD) framework that identifies SMT defects by comparing visual feature similarity instead of relying on traditional OCR.
@@ -340,9 +446,13 @@ params:
         details: |- 
           ## Overview
           This research collaboration with an SMT (Surface Mount Technology) company addressed a critical industrial challenge. Traditional OCR (Optical Character Recognition) often fails in factory environments due to dust and motion blur, leading to high false alarm rates. I developed the **MICD framework**, which utilizes Metric Learning to compare components against a "Golden Sample" rather than relying on text recognition, effectively reducing false alarms by up to 90%.
+          
+          ---
 
           ## Problem
           In SMT production lines, factories rely on OCR to verify component serial numbers. However, OCR struggles when images are blurry, dusty, or obscured—conditions common in real-world manufacturing. This results in excessive false alarms and necessitates costly manual inspections.
+          
+          ---
 
           ## Solutions
           To solve this, I developed the **MICD framework**. Instead of "reading" text, the system focuses on **feature similarity learning** through three main stages:
@@ -350,6 +460,8 @@ params:
           * **Preprocessing**: Applied grayscale conversion and sharpening to enhance image clarity.
           * **Feature Extraction**: Leveraged **Prototypical and Relation Networks** (with a **DenseNet** backbone) to extract robust visual features.
           * **Comparison**: A "**Golden Sample**" (the ideal reference image) is compared to the target component using **Cosine Similarity**. If the similarity score falls below a threshold, it is flagged.
+          
+          ---
 
           ## Impact
           The results demonstrated a significant improvement over standard methods like Google Cloud OCR:
