@@ -1,23 +1,35 @@
-{{ define "head" }}
-<meta name="description" content={{ .Site.Params.description }}>
-<link rel="stylesheet" href="{{ (printf "%scss/index.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
-<link rel="stylesheet" href="{{ (printf "%scss/projects.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ .Site.Title }} | Software Engineer</title>
+<meta name="description" content="{{ .Site.Params.description }}"><meta name="theme-color" content="#faf9f6">
+<meta property="og:title" content="Iris Kuo | Software Engineer"><meta property="og:description" content="Backend systems, cloud services, and applied AI. M.S. Computer Science and Engineering at The Ohio State University."><meta property="og:image" content="{{ "images/me.jpg" | absURL }}"><meta property="og:url" content="{{ .Permalink }}">
+<link rel="canonical" href="{{ .Permalink }}"><link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+{{ $css := resources.Get "css/portfolio.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+<script>try{if(localStorage.getItem('iris-theme')==='dark'||(!localStorage.getItem('iris-theme')&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.dataset.theme='dark';}catch(e){}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><nav aria-label="Main navigation">{{ range slice (dict "id" "home" "name" "Home") (dict "id" "about" "name" "About") (dict "id" "skills" "name" "Skills") (dict "id" "experience" "name" "Experience") (dict "id" "education" "name" "Education") (dict "id" "projects" "name" "Projects") (dict "id" "contact" "name" "Contact") }}<a class="nav-link{{ if eq .id "home" }} active{{ end }}" href="#{{ .id }}"{{ if eq .id "home" }} aria-current="location"{{ end }}>{{ .name }}</a>{{ end }}</nav></header>
+<main id="main">
+<section class="hero" id="home" aria-labelledby="hero-heading">
+<div class="portrait-wrap"><img class="portrait" src="{{ "images/me.jpg" | relURL }}" width="106" height="106" alt="Iris Kuo" fetchpriority="high"><span class="wave" aria-hidden="true">👋</span></div>
+<h1 id="hero-heading">Hello, I'm <span>Iris.</span></h1>
+<p class="hero-description">I am a student in M.S. in Computer Science at tOSU and enjoy building reliable, scalable systems that solve real-world problems.</p>
+<div class="hero-actions"><a class="button primary" href="#contact">Let's connect <span aria-hidden="true">↗</span></a><a class="button secondary" href="{{ .Site.Params.hero.button.url | relURL }}" target="_blank" rel="noopener">Download resume <span aria-hidden="true">↓</span></a><a class="icon-link" href="https://github.com/ejimful" target="_blank" rel="noopener" aria-label="Iris Kuo on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.12.68-3.78-1.33-3.78-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.23 3.27.94.1-.73.39-1.23.71-1.51-2.49-.28-5.1-1.25-5.1-5.54 0-1.23.44-2.23 1.16-3.01-.12-.29-.5-1.43.11-2.97 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.54.23 2.68.12 2.97.72.78 1.15 1.78 1.15 3.01 0 4.3-2.62 5.25-5.12 5.53.4.35.76 1.03.76 2.08v3.11c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"/></svg></a><a class="icon-link linkedin" href="https://www.linkedin.com/in/iris-kuo/" target="_blank" rel="noopener" aria-label="Iris Kuo on LinkedIn">in</a></div>
+<a class="scroll-cue" href="#about" aria-label="Explore about me"><span></span></a>
+</section>
+<section id="about" class="section about" aria-labelledby="about-heading"><h2 id="about-heading">A Little About Me</h2><div class="about-copy"><p>I'm a software engineer who enjoys making complex systems work simply and reliably. My experience spans <strong>Spring Boot microservices, cloud infrastructure, data pipelines, and AI-powered applications.</strong></p><p>I'm now pursuing my master's at <strong>The Ohio State University</strong>, with an expected graduation in <strong>May 2027.</strong></p></div></section>
+<section id="skills" class="section skills" aria-labelledby="skills-heading"><h2 id="skills-heading">Skills</h2>
+{{ range slice (dict "name" "Languages" "items" (slice "Python" "Java" "SQL" "C++" "TypeScript" "JavaScript")) (dict "name" "Frameworks & testing" "items" (slice "Spring Boot" "FastAPI" "React" "Node.js" "PyTorch" "JUnit" "pytest")) (dict "name" "Cloud & DevOps" "items" (slice "AWS" "Docker" "CI/CD" "GitHub Actions" "Git" "Linux")) (dict "name" "Data & messaging" "items" (slice "PostgreSQL" "MySQL" "Redis" "Oracle Vector DB" "RabbitMQ" "Celery" "FAISS")) }}<div class="skill-group"><h3>{{ .name }}</h3><ul class="skill-list">{{ range .items }}<li>{{ . }}</li>{{ end }}</ul></div>{{ end }}</section>
+<section id="experience" class="section" aria-labelledby="experience-heading"><h2 id="experience-heading">Experience</h2><div class="timeline">{{ range $index, $company := .Site.Params.experience.items }}{{ range $jobIndex, $job := .jobs }}<article class="timeline-item"><div class="timeline-date">{{ .date }}</div><div class="experience-card"><p class="card-kicker">{{ .name }}</p><h3><a href="{{ $company.companyUrl }}" target="_blank" rel="noopener">{{ $company.company }} <span aria-hidden="true">↗</span></a></h3><div class="prose">{{ .content | markdownify }}</div></div></article>{{ end }}{{ end }}</div></section>
+<section id="education" class="section" aria-labelledby="education-heading"><h2 id="education-heading">Education</h2><div class="timeline education-timeline">{{ range .Site.Params.education.items }}<article class="timeline-item education-item"><div class="timeline-date">{{ .date }}</div><div class="experience-card education-card"><h3><a href="{{ .school.url }}" target="_blank" rel="noopener">{{ .school.name }} <span aria-hidden="true">↗</span></a></h3><p class="degree-title">{{ .title }}</p><p class="gpa">GPA {{ .GPA }}</p>{{ if eq .school.name "The Ohio State University" }}<p class="coursework">Coursework: Operating Systems, Algorithms, Data Structures, Parallel Computing, Machine Learning</p>{{ end }}</div></article>{{ end }}</div></section>
+<section id="projects" class="section" aria-labelledby="projects-heading"><h2 id="projects-heading">Projects</h2><p class="section-intro">A few things I've built across backend systems and applied AI.</p><div class="project-list">{{ range $index, $project := .Site.Params.projects.items }}<article class="project-card"><div class="project-copy"><h3>{{ .title }}</h3><p>{{ .content }}</p><ul class="tags">{{ range .badges }}<li>{{ . }}</li>{{ end }}</ul><button class="project-open text-link" type="button" data-dialog="{{ .modalId }}">Explore project <span aria-hidden="true">↗</span></button></div><div class="project-image"><img src="{{ .image | relURL }}" alt="{{ .title }} — system diagram" loading="lazy" width="600" height="400"></div></article><dialog id="{{ .modalId }}" class="project-dialog" aria-labelledby="{{ .modalId }}-title"><div class="dialog-heading"><h2 id="{{ .modalId }}-title">{{ .title }}</h2><button class="dialog-close" type="button" aria-label="Close project details">×</button></div><div class="dialog-body"><img src="{{ .image | relURL }}" alt="{{ .title }} — system diagram" loading="lazy"><div class="prose">{{ .details | markdownify | replaceRE `id="([^"]+)"` (printf `id="%s-$1"` .modalId) | safeHTML }}</div>{{ with .links }}<div class="publication-links">{{ range . }}<a class="button secondary" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }} <span aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</div></dialog>{{ end }}</div></section>
 
-<!-- fontawesome -->
-<script defer src="{{ (printf "%sfontawesome-6/all-6.4.2.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
-{{ end }}
-
-{{ define "title" }}
-{{ .Site.Title }}
-{{ end }}
-
-{{ define "main" }}
-{{- partial "sections/hero/index.html" . -}}
-{{- partial "sections/about.html" . -}}
-{{- partial "sections/experience.html" . -}}
-{{- partial "sections/research.html" . -}}
-{{- partial "sections/education.html" . -}}
-{{- partial "sections/projects.html" . -}}
-{{- partial "sections/achievements.html" . -}}
-{{- partial "sections/contact.html" . -}}
-{{ end }}
+<section id="contact" class="section contact" aria-labelledby="contact-heading"><h2 id="contact-heading">Great things start<br>with a conversation.</h2><p>Have an opportunity, a project, or a question?<br>I'd love to hear from you.</p><a class="contact-email" href="mailto:kyciao0627@gmail.com">kyciao0627@gmail.com <span aria-hidden="true">↗</span></a><div class="contact-links"><a href="https://github.com/ejimful" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/iris-kuo/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="{{ .Site.Params.hero.button.url | relURL }}" target="_blank" rel="noopener">Resume ↓</a></div></section>
+</main>
+<footer><a class="footer-name" href="#home">Iris Kuo<span>.</span></a><p>© {{ now.Year }} Iris Kuo. Built with care.</p><a href="#home">Back to top ↑</a></footer>
+<button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.4 13.3A8.5 8.5 0 0 1 10.7 3.6a8.5 8.5 0 1 0 9.7 9.7Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg></button>
+{{ $js := resources.Get "js/portfolio.js" | minify | fingerprint }}<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+</body></html>
