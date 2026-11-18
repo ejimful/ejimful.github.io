@@ -81,6 +81,8 @@ menus:
 
 params:
   title: "Iris Kuo"
+  analytics:
+    googleAnalyticsId: "G-6RBTBQ8PH1"
   description: "Iris Kuo — M.S. Computer Science and Engineering at The Ohio State University. Software engineer focused on backend systems."
   # staticPath: ""  # The path to serve the static files from
   favicon: "/fav.png"

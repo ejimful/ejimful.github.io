@@ -36,11 +36,27 @@ window.addEventListener('resize', updateNavigation);
 updateNavigation();
 document.querySelectorAll('.project-open').forEach(button => {
   const dialog = document.getElementById(button.dataset.dialog);
-  button.addEventListener('click', () => dialog.showModal());
+  button.addEventListener('click', () => {
+    if (typeof window.gtag === 'function') {
+      const title = document.getElementById(dialog.getAttribute('aria-labelledby'));
+      window.gtag('event', 'view_project', { project_name: title?.textContent.trim() });
+    }
+    dialog.showModal();
+  });
   dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
     const rect = dialog.getBoundingClientRect();
     if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
   });
   dialog.addEventListener('close', () => button.focus({ preventScroll: true }));
+});
+document.querySelectorAll('a[href*="Resume_IrisKuo"]').forEach(link => {
+  link.addEventListener('click', () => {
+    if (typeof window.gtag === 'function') window.gtag('event', 'resume_click');
+  });
+});
+document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+  link.addEventListener('click', () => {
+    if (typeof window.gtag === 'function') window.gtag('event', 'contact_email_click');
+  });
 });
